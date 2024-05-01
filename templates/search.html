@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <!-- Include any necessary CSS -->
+</head>
+<body class="bg-dark text-light">
+  <h1 class="text-center">Movie Details</h1>
+  <nav>
+    <!-- Navigation content goes here -->
+  </nav>
+  <div class="container mt-5">
+    <% if (movieData) { %>
+      <form id="movieinfo" action="/searchtest" method="POST" autocomplete="off">
+        <div class="card">
+          <div class="card-header bg-dark text-white">
+            <h5 class="card-title"><%= movieData.Title %></h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <% if (movieData.Poster) { %>
+                  <img src="<%= movieData.Poster %>" class="img-fluid" alt="Movie Poster">
+                <% } else { %>
+                  <p>No poster available</p>
+                <% } %>
+              </div>
+              <div class="col-md-8">
+                <p>Title: <%= movieData.Title %></p>
+                <p>Year: <%= movieData.Year %></p>
+                <p>Rated: <%= movieData.Rated %></p>
+                <p>Runtime: <%= movieData.Runtime %></p>
+                <p>Genre: <%= movieData.Genre %></p>
+                <p>Plot:</p>
+                <p><%= movieData.Plot %></p>
+                <p>Directed by: <%= movieData.Director %></p>
+                <p>Starring: <%= movieData.Actors %></p>
+                <button class="btn btn-primary" type="submit">Save To List</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input type="hidden" name="title" value="<%= movieData.Title%>">
+        <input type="hidden" name="year" value="<%= movieData.Year%>">
+        <input type="hidden" name="rated" value="<%= movieData.Rated%>">
+        <input type="hidden" name="runtime" value="<%= movieData.Runtime%>">
+        <input type="hidden" name="poster" value="<%= movieData.Poster%>">
+        <input type="hidden" name="genre" value="<%= movieData.Genre%>">
+        <textarea name="plot" rows="4" cols="50" style="display: none;"><%= movieData.Plot%></textarea>
+        <input type="hidden" name="director" value="<%= movieData.Director%>">
+        <input type="hidden" name="actor" value="<%= movieData.Actors%>">
+      </form>
+    <% } else { %>
+      <div class="alert alert-warning" role="alert">
+        No movie found.
+      </div>
+    <% } %>
+  </div>
+  <!-- Include any necessary JavaScript -->
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
