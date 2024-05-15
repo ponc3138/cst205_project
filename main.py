@@ -1,41 +1,9 @@
-# from flask import Flask, render_template
-# from flask_bootstrap import Bootstrap
-# import random
-# import os
-# from PIL import Image
-
-# app = Flask(__name__)
-# bootstrap = Bootstrap(app) 
-
-# @app.route('/')
-# def home():
-#     # # Generate a random number between 1 and 10
-#     # random_number = random.randint(1, 10)
-
-#     # # Example of passing data to the template
-#     return render_template('index.html')
-
-# # playlist = []
-
-# # def store_song(my_song):
-# #     playlist.append(dict(
-# #         song = my_song,
-# #         date = datetime.today()
-# #     ))
-
-# # @app.route('/', methods=('GET', 'POST'))
-# # def index():
-# #     form = Playlist()
-# #     if form.validate_on_submit():
-# #         store_song(form.song_title.data)
-# #         return redirect('/view_playlist')
-# #     return render_template('index.html', form=form)
-
 # # flask --app main --debug run
 from flask import Flask, render_template, request, session, redirect, url_for
 import pymysql
 import bcrypt
 import requests
+# import json 
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -51,9 +19,27 @@ def db_connection():
     )
     return connection
 
+async def execute_sql(sql, params):
+    connection = pymysql.connect(
+        host="z5zm8hebixwywy9d.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+        user="mhrea84z1b2h34f8",
+        password="r8q2hd2wo276ny8z",
+        database="f0bxmsv6e0srffqw",
+        cursorclass=pymysql.cursors.DictCursor
+    )
+
+    try:
+        with connection.cursor() as cursor:
+            await cursor.execute(sql, params)
+            result = cursor.fetchall()
+            return result
+    finally:
+        connection.close()
+
 # Check if user is authenticated
 def is_authenticated():
     return 'authenticated' in session and session['authenticated']
+
 
 # Home route
 @app.route('/')
@@ -61,6 +47,7 @@ def home():
     if not is_authenticated():
         return redirect(url_for('login'))
     return render_template('index.html')
+
 
 # Login route
 @app.route('/login', methods=['GET', 'POST'])
@@ -81,11 +68,6 @@ def login():
         return render_template('login.html', errorMessage="Wrong username/password!")
     return render_template('login.html', errorMessage="")
 
-# Logout route
-# @app.route('/logout')
-# def logout():
-#     session.pop('authenticated', None)
-#     return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():
@@ -93,7 +75,7 @@ def logout():
     return render_template('login.html', errorMessage='Error!!!')
     
 
-@app.route('/searchInfo', methods=['GET'])
+@app.route('/searchInfo',methods=['GET', 'POST'])
 def search_info():
     if not is_authenticated():
         return redirect(url_for('login'))
@@ -105,28 +87,55 @@ def search():
     if not is_authenticated():
         return redirect(url_for('login'))
     movie_title = request.form['title']
+    print(movie_title)
     api_key = 'f3b20a94'
     response = requests.get(f'http://www.omdbapi.com/?apikey={api_key}&t={movie_title}')
     movie_data = response.json()
     return render_template('search.html', movieData=movie_data)
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-# @app.route('/newUser', methods=['POST'])
-# def new_user():
-#     # Extract username and password from the request
-#     user = request.form['username']
-#     passw = request.form['password']
-    
-#     # SQL query to insert new user
-#     sql = "INSERT INTO p_admin (username, password) VALUES (?, ?)"
-#     params = (user, passw)
-    
-#     # Execute SQL query
-#     data = execute_sql(sql, params)
-    
-#     # Render login page after inserting user
-#     return render_template('login.html')
+@app.route('/newUser')
+def new_user():
+    return render_template('newUser.html')
 
+@app.route('/newUser', methods=['GET', 'POST'])
+def new_user_info():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']  
+
+        # Hash the password
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+        connection = db_connection()
+        
+        try:
+            with connection.cursor() as cursor:
+                # SQL query to insert username and hashed password into the table
+                sql = "INSERT INTO p_admin (username, password) VALUES (%s, %s)"
+                # Execute the query with username and hashed password as parameters
+                cursor.execute(sql, (username, hashed_password))
+                connection.commit()
+        except Exception as e:
+            # If an error occurs
+            connection.rollback()
+            # Handle the error
+            print("Error:", e)
+        finally:
+            # Close database connection
+            connection.close()
+
+        # Redirect to success page
+        return redirect(url_for('new_user_success', username=username))
+    return render_template('newUser.html')
+
+
+@app.route('/newUserSuccess/<username>')
+def new_user_success(username):
+    return render_template('newUserSuccess.html', username=username)
 
 # if __name__ == '__main__':
 #     app.run(debug=True)

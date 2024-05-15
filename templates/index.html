@@ -1,75 +1,90 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Our Movie / Show Website!</title>
-</head>
-<body class="bg-dark text-light">
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h1>Welcome to Our Movie / Show Website!</h1>
-        <p class="lead">Explore the world of movies and shows</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-12 d-flex justify-content-center">
-        <div id="randomPhoto" class="card bg-dark text-white mb-3">
-          <div class="card-body text-center">
-            <img id="randomImage" class="img-fluid mx-auto d-block" src="https://thumbs.dreamstime.com/b/movie-slate-film-reel-wood-clapper-wooden-backgorund-36502412.jpg" alt="Random Image">
-          </div>
-        </div>
-      </div>
-
-    <form action="/logout" method="GET">
-        <button type="submit">Logout</button>
-    </form>
-
-    </div>
-  </div>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Our Movie / Show Website!</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://www.shutterstock.com/image-vector/abstract-golden-light-rays-scene-600nw-2271597037.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #000000;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+            padding: 30px;
+        }
+        .card {
+            background-color: transparent;
+            border: none;
+        }
+        .card-body {
+            padding: 0;
+        }
+        .lead {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        button {
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            padding: 15px 30px; 
+            font-size: 1.2rem; 
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 20px; 
+            margin-bottom: 20px; 
+        }
+        button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .bordered-text {
+            padding: 20px 40px; 
+            border-radius: 20px; 
+            background: linear-gradient(135deg, #645d484d, #c3960099); 
+            background-clip: padding-box; 
+            color: #ffffff; 
+            margin-bottom: 20px; 
+            display: inline-block;
+        }
+    </style>
 </head>
-<body class="bg-dark text-light">
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h1>Welcome to Our Movie / Show Website!</h1>
-        <p class="lead">Explore the world of movies and shows</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12 d-flex justify-content-center">
-        <div id="randomPhoto" class="card bg-dark text-white mb-3">
-          <div class="card-body text-center">
-            <img id="randomImage" class="img-fluid mx-auto d-block" src="https://thumbs.dreamstime.com/b/movie-slate-film-reel-wood-clapper-wooden-backgorund-36502412.jpg" alt="Random Image">
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="bordered-text">Welcome to Our Movie Website!</h1>
+                <br>
+                <p class="lead bordered-text">Explore the World of Movies</p>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form action="/searchInfo" method="GET">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            <div class="col-lg-12">
+              <form action="/logout" method="GET">
+                  <button type="submit">Logout</button>
+              </form>
           </div>
         </div>
-      </div>
     </div>
-    <div class="row">
-      <div class="col-lg-12 d-flex justify-content-center">
-        <form action="/logout" method="GET">
-            <button type="submit">Logout</button>
-        </form>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12 d-flex justify-content-center">
-        <form action="/searchInfo" method="GET">
-            <button type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </div>
 </body>
 </html>
