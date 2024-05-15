@@ -1,85 +1,159 @@
+<!-- https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp -->
+<!-- Used to add scrollbar  -->
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Search</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #0f0f0f;
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
-        }
-        .container {
-            margin-top: 50px;
-        }
-        .movie-reel-icon {
-            max-width: 200px;
-            margin-bottom: 20px;
-        }
-        .search-form {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
-        }
-        .search-form input[type="text"] {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            font-size: 18px;
-            margin-bottom: 20px;
-            box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.1);
-        }
-        .search-form button {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: #ff0066;
-            color: #ffffff;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 18px;
-        }
-        .search-form button:hover {
-            background-color: #e6005c;
-        }
-        .search-form h1 {
-            font-size: 36px;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        .search-form p {
-            font-size: 20px;
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Search</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: #ffffff;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+      margin-top: 50px;
+    }
+
+    .movie-reel-icon {
+      max-width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .search-form {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .search-form input[type="text"] {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      font-size: 18px;
+      margin-bottom: 20px;
+      box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.1);
+    }
+
+    .search-form button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #ff0066;
+      color: #ffffff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 18px;
+    }
+
+    .search-form button:hover {
+      background-color: #e6005c;
+    }
+
+    .search-form h1 {
+      font-size: 36px;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .search-form p {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+
+    .movies-container {
+      overflow-x: scroll;
+      white-space: nowrap;
+      margin-top: 20px;
+      padding-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .movies-container::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .movies-container::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 5px;
+    }
+
+    .movies-container::-webkit-scrollbar-track {
+      background-color: #f1f1f1;
+      border-radius: 5px;
+
+    }
+
+    .movie-card {
+      display: inline-block;
+      margin-right: 20px;
+      vertical-align: top;
+    }
+
+    .movie-poster {
+      width: 150px;
+      height: auto;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .movie-poster:hover {
+      transform: scale(1.05);
+    }
+
+    .movie-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
-
-<div class="container">
+  <div class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-6">
-            <div class="text-center mb-4">
-                <img src="https://static.vecteezy.com/system/resources/previews/010/922/079/original/film-reel-icon-on-white-background-film-strip-sign-film-reel-movie-symbol-flat-style-vector.jpg" alt="Movie Reel Icon" class="movie-reel-icon">
-                <h1>Movie Search</h1>
-            </div>
-            <form action="/search" method="post" class="search-form">
-                <div class="form-group">
-                    <input type="text" name="title" class="form-control" placeholder="Enter movie title">
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </div>
-            </form>
+      <div class="col-lg-6">
+        <div class="text-center mb-4">
+          <img
+            src="https://static.vecteezy.com/system/resources/previews/010/922/079/original/film-reel-icon-on-white-background-film-strip-sign-film-reel-movie-symbol-flat-style-vector.jpg"
+            alt="Movie Reel Icon" class="movie-reel-icon">
+          <h1>Movie Search</h1>
         </div>
+        <form action="/search" method="post" class="search-form">
+          <div class="form-group">
+            <input type="text" name="title" class="form-control" placeholder="Enter movie title">
+          </div>
+          <div class="text-center">
+            <button type="submit" name="search" class="btn btn-primary">Search</button>
+            <button type="submit" name="random" class="btn btn-secondary mt-3">Random Movie</button>
+          </div>
+        </form>
+        <div class="movies-container">
+          {% for movie in random_movies %}
+          <div class="movie-card">
+            <img src="{{ movie.big_image }}" alt="Movie Poster" class="movie-poster">
+            <p class="movie-title">{{ movie.title }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
-</div>
-
+  </div>
 </body>
+
 </html>
