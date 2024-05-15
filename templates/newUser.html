@@ -4,13 +4,48 @@
   <title>New User Form</title>
 
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> 
+  <style>
+    body{
+      background-image: url('https://plus.unsplash.com/premium_photo-1709384734028-00a1604b3ef4?q=80&w=2058&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #000000;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      font-weight: bold;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .card-body {
+      background-image: url('https://images.unsplash.com/photo-1562329265-95a6d7a83440?q=80&w=1970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-size: cover;
+      background-position: 70%;
+      font-weight: bolder;
+      color:white;
+      border-radius: 10px 10px 0 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .card-title{
+      font-weight: bolder;
+      color:white;
+      border-radius: 10px 10px 0 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+  </style>
 </head>
 <body class="bg-dark">
   <div class="container mt-5">
     <div class="card">
       <div class="card-body bg-light">
-        <h1 class="card-title text-center text-primary">Join our Movie / Show Community</h1>
-        <form action="{{ url_for('new_user_info') }}" method="POST">
+        <div class="card-body">
+            <h1 class="card-title text-center text-primary">Join our Movie / Show Community</h1>
+          <form action="{{ url_for('new_user_info') }}" method="POST">
           <div class="form-group">
               <label for="username">Username:</label>
               <input type="text" class="form-control" id="username" name="username">
@@ -20,7 +55,10 @@
               <input type="password" class="form-control" id="password" name="password">
           </div>
           <button type="submit" class="btn btn-primary btn-block">Create Account</button>
-      </form>
+        </form>
+        <div class="card-footer text-center">
+          <p class="mb-0">Already have an account? <a href="/login">Sign in!</a></p>
+        </div>
       </div>
     </div>
   </div>
