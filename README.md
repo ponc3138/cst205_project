@@ -2,9 +2,9 @@
 Movie Website
 
 By:
-Fernando Ponce
-Ethan Pimentel
-Michael Tan
+Fernando Ponce,
+Ethan Pimentel,
+Michael Tan,
 Noemhi Marquez
 
 CST 205
