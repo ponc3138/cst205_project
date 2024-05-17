@@ -14,6 +14,10 @@ How to run:
 Need to have flask, pymysql, bcrypt, and requests installed. 
 To install run this command in terminal: pip install * (replace * with what you need to install. Ex: pip install flask).
 Clone repo, and run on local machine using this command in terminal: flask --app main --debug run
+Use the following credentials to access the website:
+Username: admin
+Password: secret
+
 
 
 Github Repository: [https://github.com/ponc3138/cst205_project.git](url)
